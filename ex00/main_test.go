@@ -91,3 +91,96 @@ func TestIsSquare(t *testing.T) {
 		}
 	}
 }
+
+func TestIsCheck(t *testing.T) {
+	testIsCheckForPawn(t)
+}
+
+func testIsCheckForPawn(t *testing.T) {
+	trueTest := [][]string{
+		[]string{
+			"K..",
+			".P.",
+			"...",
+		},
+		[]string{
+			"..K",
+			".P.",
+			"...",
+		},
+		[]string{
+			"PPP",
+			"PKP",
+			"PPP",
+		},
+	}
+	falseTest := [][]string{
+		[]string{
+			"P",
+		},
+		[]string{
+			".P",
+			"..",
+		},
+		[]string{
+			".K.",
+			".P.",
+			"...",
+		},
+		[]string{
+			".K.",
+			".P.",
+			"...",
+		},
+		[]string{
+			"...",
+			".PK",
+			"...",
+		},
+		[]string{
+			"...",
+			".P.",
+			"..K",
+		},
+		[]string{
+			"...",
+			".P.",
+			".K.",
+		},
+		[]string{
+			"...",
+			".P.",
+			"K..",
+		},
+		[]string{
+			"...",
+			"KP.",
+			"...",
+		},
+		[]string{
+			"K..",
+			"..P",
+			"...",
+		},
+		[]string{
+			".P.",
+			"...",
+			"..K",
+		},
+		[]string{
+			"K..",
+			"...",
+			"..P",
+		},
+	}
+	for _, v := range trueTest {
+		if isCheck(v) != true {
+			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
+		}
+	}
+	for _, v := range falseTest {
+		if isCheck(v) != false {
+			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
+		}
+	}
+}
