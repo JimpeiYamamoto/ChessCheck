@@ -5,37 +5,28 @@ import (
 )
 
 func TestIsSquare(t *testing.T) {
-	var board []string
+	tests := []struct {
+		board    []string
+		expected bool
+	}{
+		{[]string{
+			"R.P.",
+			".K..",
+			"..P.",
+			"....",
+		}, true},
+		{[]string{
+			"R",
+		}, true},
+		{[]string{
+			"R",
+			"R",
+		}, false},
+	}
 
-	board = []string{
-		"R.P.",
-		".K..",
-		"..P.",
-		"....",
-	}
-	if !isSquare(board) {
-		t.Errorf("aaa")
-	}
-	board = []string{
-		"R.P.",
-		".K..",
-		"..P..",
-		"....",
-	}
-	if isSquare(board) {
-		t.Errorf("bbb")
-	}
-	board = []string{
-		"R",
-	}
-	if !isSquare(board) {
-		t.Errorf("ccc")
-	}
-	board = []string{
-		"R",
-		"R",
-	}
-	if isSquare(board) {
-		t.Errorf("ccc")
+	for i, v := range tests {
+		if isSquare(v.board) != v.expected {
+			t.Errorf("error: index=%d", i)
+		}
 	}
 }
