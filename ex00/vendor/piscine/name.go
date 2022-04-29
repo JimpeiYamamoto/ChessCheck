@@ -1,3 +1,0 @@
-package piscine
-
-import "ft"
