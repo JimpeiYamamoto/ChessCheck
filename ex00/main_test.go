@@ -22,6 +22,10 @@ func TestIsSquare(t *testing.T) {
 			"R",
 			"R",
 		}, false},
+		{[]string{
+			"",
+		}, false},
+		{[]string{}, false},
 	}
 
 	for i, v := range tests {

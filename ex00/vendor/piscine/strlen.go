@@ -3,7 +3,8 @@ package piscine
 func Strlen(str string) (i int) {
 	runs := []rune(str)
 
-	for i = range runs {
+	for range runs {
+		i++
 	}
-	return i + 1
+	return i
 }

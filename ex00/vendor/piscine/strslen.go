@@ -1,7 +1,8 @@
 package piscine
 
 func Strslen(strs []string) (i int) {
-	for i = range strs {
+	for range strs {
+		i++
 	}
-	return i + 1
+	return i
 }

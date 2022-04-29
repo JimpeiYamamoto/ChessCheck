@@ -6,6 +6,9 @@ import (
 
 func isSquare(board []string) bool {
 	len := piscine.Strslen(board)
+	if len == 0 {
+		return false
+	}
 	for _, row := range board {
 		if len != piscine.Strlen(row) {
 			return false
