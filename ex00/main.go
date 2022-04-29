@@ -40,7 +40,16 @@ func isValid(board []string) bool {
 	return true
 }
 
-func isCheck() bool {
+func isCheck(board Board) bool {
+	for y, row := range board {
+		for x, cell := range row {
+			if Piece(cell).isCollideKing(board, y, x) {
+				return true
+			}
+		}
+	}
+	//左上から、駒があるところを見ていく
+	//駒があったら、(), 全てのパターンで動かす, キングとぶつかるか(間に駒がない)
 	return false
 }
 
@@ -56,16 +65,22 @@ func checkmate(board []string) {
 	if !isValid(board) {
 		return
 	}
-	bl := isCheck()
+	bl := isCheck(board)
 	output(bl)
 }
 
 func main() {
 	board := []string{
-		"R.P.",
-		".K..",
-		"..P.",
+		"P234",
+		"5678",
+		"9Kab",
 		"....",
 	}
+	//board := []string{
+	//	"R.P.",
+	//	".K..",
+	//	"..P.",
+	//	"....",
+	//}
 	checkmate(board)
 }
