@@ -96,325 +96,141 @@ func TestIsCheck(t *testing.T) {
 	testIsCheckForPawn(t)
 	testIsCheckForBishop(t)
 	testIsCheckForRook(t)
-}
-
-func testIsCheckForRook(t *testing.T) {
-	trueTest := [][]string{
-		[]string{
-			"K..",
-			"...",
-			"R..",
-		},
-		[]string{
-			"K.R",
-			"...",
-			"...",
-		},
-		[]string{
-			"KR.",
-			"...",
-			"...",
-		},
-		[]string{
-			"K..",
-			"R..",
-			"...",
-		},
-		[]string{
-			"..R..",
-			".....",
-			"..K..",
-			".....",
-			".....",
-		},
-		[]string{
-			".....",
-			".....",
-			"..K.R",
-			".....",
-			".....",
-		},
-		[]string{
-			".....",
-			".....",
-			"..K..",
-			".....",
-			"..R..",
-		},
-		[]string{
-			".....",
-			".....",
-			"R.K..",
-			".....",
-			".....",
-		},
-	}
-	falseTest := [][]string{
-		[]string{
-			"K..",
-			".R.",
-			"...",
-		},
-		[]string{
-			"K..",
-			"...",
-			"..R",
-		},
-		[]string{
-			"K..",
-			".R.",
-			"...",
-		},
-		[]string{
-			"...",
-			".K.",
-			"R..",
-		},
-		[]string{
-			".....",
-			"....R",
-			"..K..",
-			".....",
-			".....",
-		},
-		[]string{
-			".R...",
-			".....",
-			"..K..",
-			".....",
-			".....",
-		},
-		[]string{
-			".....",
-			".....",
-			"..K..",
-			".....",
-			"...R.",
-		},
-		[]string{
-			"R....",
-			".....",
-			"..K..",
-			".....",
-			".....",
-		},
-	}
-	for _, v := range trueTest {
-		if isCheck(v) != true {
-			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
-		}
-	}
-	for _, v := range falseTest {
-		if isCheck(v) != false {
-			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
-		}
-	}
+	testIsCheckForQueen(t)
 }
 
 func testIsCheckForPawn(t *testing.T) {
-	trueTest := [][]string{
-		[]string{
-			"K..",
-			".P.",
-			"...",
-		},
-		[]string{
-			"..K",
-			".P.",
-			"...",
-		},
-		[]string{
-			"PPP",
-			"PKP",
-			"PPP",
-		},
+	// trueTest := [][]byte{
+	// 	[]byte("PPPPP"),
+	// 	[]byte("PPPPP"),
+	// 	[]byte("PPKPP"),
+	// 	[]byte("PPPPP"),
+	// 	[]byte("PPPPP"),
+	// }
+	trueTest := [][]byte{
+		[]byte("....."),
+		[]byte("....."),
+		[]byte("..K.."),
+		[]byte(".P.P."),
+		[]byte("....."),
 	}
-	falseTest := [][]string{
-		[]string{
-			"P",
-		},
-		[]string{
-			".P",
-			"..",
-		},
-		[]string{
-			".K.",
-			".P.",
-			"...",
-		},
-		[]string{
-			".K.",
-			".P.",
-			"...",
-		},
-		[]string{
-			"...",
-			".PK",
-			"...",
-		},
-		[]string{
-			"...",
-			".P.",
-			"..K",
-		},
-		[]string{
-			"...",
-			".P.",
-			".K.",
-		},
-		[]string{
-			"...",
-			".P.",
-			"K..",
-		},
-		[]string{
-			"...",
-			"KP.",
-			"...",
-		},
-		[]string{
-			"K..",
-			"..P",
-			"...",
-		},
-		[]string{
-			".P.",
-			"...",
-			"..K",
-		},
-		[]string{
-			"K..",
-			"...",
-			"..P",
-		},
+	falseTest := [][]byte{
+		[]byte("PPPPP"),
+		[]byte("PPPPP"),
+		[]byte("PPKPP"),
+		[]byte("P.P.P"),
+		[]byte("PPPPP"),
 	}
-	for _, v := range trueTest {
-		if isCheck(v) != true {
-			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
-		}
-	}
-	for _, v := range falseTest {
-		if isCheck(v) != false {
-			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
-		}
-	}
+	testIsCheckHelper(t, trueTest, true, 'P')
+	testIsCheckHelper(t, falseTest, false, 'P')
 }
 
 func testIsCheckForBishop(t *testing.T) {
-	trueTest := [][]string{
-		[]string{
-			"K..",
-			".B.",
-			"...",
-		},
-		[]string{
-			"..K",
-			".B.",
-			"...",
-		},
-		[]string{
-			"...",
-			".B.",
-			"..K",
-		},
-		[]string{
-			"...",
-			".B.",
-			"K..",
-		},
-		[]string{
-			"..K",
-			"...",
-			"B..",
-		},
-		[]string{
-			"..B",
-			"...",
-			"K..",
-		},
-		[]string{
-			"K..",
-			"...",
-			"..B",
-		},
-		[]string{
-			"B..",
-			"...",
-			"..K",
-		},
-		[]string{
-			"BBB",
-			"BKB",
-			"BBB",
-		},
+	// trueTest := [][]byte{
+	// 	[]byte("BBBBB"),
+	// 	[]byte("BBBBB"),
+	// 	[]byte("BBKBB"),
+	// 	[]byte("BBBBB"),
+	// 	[]byte("BBBBB"),
+	// }
+	trueTest := [][]byte{
+		[]byte("B...B"),
+		[]byte(".B.B."),
+		[]byte("..K.."),
+		[]byte(".B.B."),
+		[]byte("B...B"),
 	}
-	falseTest := [][]string{
-		[]string{
-			"B",
-		},
-		[]string{
-			".B",
-			"..",
-		},
-		[]string{
-			".K.",
-			".B.",
-			"...",
-		},
-		[]string{
-			"...",
-			".BK",
-			"...",
-		},
-		[]string{
-			"...",
-			".B.",
-			".K.",
-		},
-		[]string{
-			"...",
-			"KB.",
-			"...",
-		},
-		[]string{
-			"K..",
-			"..B",
-			"...",
-		},
-		[]string{
-			".B.",
-			"...",
-			"..K",
-		},
-		[]string{
-			"...",
-			"K.B",
-			"...",
-		},
-		[]string{
-			"...",
-			"B.K",
-			"...",
-		},
-		[]string{
-			".K.",
-			"...",
-			".B.",
-		},
-		[]string{
-			".B.",
-			"...",
-			".K.",
-		},
+	falseTest := [][]byte{
+		[]byte(".BBB."),
+		[]byte("B.B.B"),
+		[]byte("BBKBB"),
+		[]byte("B.B.B"),
+		[]byte(".BBB."),
 	}
-	for _, v := range trueTest {
-		if isCheck(v) != true {
-			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
-		}
+	testIsCheckHelper(t, trueTest, true, 'B')
+	testIsCheckHelper(t, falseTest, false, 'B')
+}
+
+func testIsCheckForRook(t *testing.T) {
+	// trueTest := [][]byte{
+	// 	[]byte("RRRRR"),
+	// 	[]byte("RRRRR"),
+	// 	[]byte("RRKRR"),
+	// 	[]byte("RRRRR"),
+	// 	[]byte("RRRRR"),
+	// }
+	trueTest := [][]byte{
+		[]byte("..R.."),
+		[]byte("..R.."),
+		[]byte("RRKRR"),
+		[]byte("..R.."),
+		[]byte("..R.."),
 	}
-	for _, v := range falseTest {
-		if isCheck(v) != false {
-			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
+	falseTest := [][]byte{
+		[]byte("RR.RR"),
+		[]byte("RR.RR"),
+		[]byte("..K.."),
+		[]byte("RR.RR"),
+		[]byte("RR.RR"),
+	}
+	testIsCheckHelper(t, trueTest, true, 'R')
+	testIsCheckHelper(t, falseTest, false, 'R')
+}
+
+func testIsCheckForQueen(t *testing.T) {
+	// trueTest := [][]byte{
+	// 	[]byte("QQQQQ"),
+	// 	[]byte("QQQQQ"),
+	// 	[]byte("QQKQQ"),
+	// 	[]byte("QQQQQ"),
+	// 	[]byte("QQQQQ"),
+	// }
+	trueTest := [][]byte{
+		[]byte("Q.Q.Q"),
+		[]byte(".QQQ."),
+		[]byte("QQKQQ"),
+		[]byte(".QQQ."),
+		[]byte("Q.Q.Q"),
+	}
+	falseTest := [][]byte{
+		[]byte(".Q.Q."),
+		[]byte("Q...Q"),
+		[]byte("..K.."),
+		[]byte("Q...Q"),
+		[]byte(".Q.Q."),
+	}
+	testIsCheckHelper(t, trueTest, true, 'Q')
+	testIsCheckHelper(t, falseTest, false, 'Q')
+}
+
+func testIsCheckHelper(t *testing.T, board [][]byte, expected bool, piece byte) {
+	for y := range board {
+		for x := range board {
+			if board[y][x] != piece {
+				continue
+			}
+			tmp := [][]byte{
+				[]byte("....."),
+				[]byte("....."),
+				[]byte("..K.."),
+				[]byte("....."),
+				[]byte("....."),
+			}
+			tmp[y][x] = piece
+			tmpBoard := []string{
+				string(tmp[0]),
+				string(tmp[1]),
+				string(tmp[2]),
+				string(tmp[3]),
+				string(tmp[4]),
+			}
+			if isCheck(tmpBoard) != expected {
+				if expected {
+					t.Errorf("error: expected true\n%s", strings.Join(tmpBoard[:], "\n"))
+				} else {
+					t.Errorf("error: expected false\n%s", strings.Join(tmpBoard[:], "\n"))
+				}
+			}
 		}
 	}
 }
