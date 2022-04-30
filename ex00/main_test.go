@@ -95,6 +95,120 @@ func TestIsSquare(t *testing.T) {
 func TestIsCheck(t *testing.T) {
 	testIsCheckForPawn(t)
 	testIsCheckForBishop(t)
+	testIsCheckForRook(t)
+}
+
+func testIsCheckForRook(t *testing.T) {
+	trueTest := [][]string{
+		[]string{
+			"K..",
+			"...",
+			"R..",
+		},
+		[]string{
+			"K.R",
+			"...",
+			"...",
+		},
+		[]string{
+			"KR.",
+			"...",
+			"...",
+		},
+		[]string{
+			"K..",
+			"R..",
+			"...",
+		},
+		[]string{
+			"..R..",
+			".....",
+			"..K..",
+			".....",
+			".....",
+		},
+		[]string{
+			".....",
+			".....",
+			"..K.R",
+			".....",
+			".....",
+		},
+		[]string{
+			".....",
+			".....",
+			"..K..",
+			".....",
+			"..R..",
+		},
+		[]string{
+			".....",
+			".....",
+			"R.K..",
+			".....",
+			".....",
+		},
+	}
+	falseTest := [][]string{
+		[]string{
+			"K..",
+			".R.",
+			"...",
+		},
+		[]string{
+			"K..",
+			"...",
+			"..R",
+		},
+		[]string{
+			"K..",
+			".R.",
+			"...",
+		},
+		[]string{
+			"...",
+			".K.",
+			"R..",
+		},
+		[]string{
+			".....",
+			"....R",
+			"..K..",
+			".....",
+			".....",
+		},
+		[]string{
+			".R...",
+			".....",
+			"..K..",
+			".....",
+			".....",
+		},
+		[]string{
+			".....",
+			".....",
+			"..K..",
+			".....",
+			"...R.",
+		},
+		[]string{
+			"R....",
+			".....",
+			"..K..",
+			".....",
+			".....",
+		},
+	}
+	for _, v := range trueTest {
+		if isCheck(v) != true {
+			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
+		}
+	}
+	for _, v := range falseTest {
+		if isCheck(v) != false {
+			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
+		}
+	}
 }
 
 func testIsCheckForPawn(t *testing.T) {
