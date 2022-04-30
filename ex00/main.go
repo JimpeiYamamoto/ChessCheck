@@ -48,8 +48,6 @@ func isCheck(board Board) bool {
 			}
 		}
 	}
-	//左上から、駒があるところを見ていく
-	//駒があったら、(), 全てのパターンで動かす, キングとぶつかるか(間に駒がない)
 	return false
 }
 
@@ -71,16 +69,10 @@ func checkmate(board []string) {
 
 func main() {
 	board := []string{
-		"P234",
-		"5678",
-		"9Kab",
+		"R.P.",
+		".K..",
+		"..P.",
 		"....",
 	}
-	//board := []string{
-	//	"R.P.",
-	//	".K..",
-	//	"..P.",
-	//	"....",
-	//}
 	checkmate(board)
 }

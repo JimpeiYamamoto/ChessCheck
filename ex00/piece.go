@@ -23,7 +23,10 @@ func (p Piece) isPiece() bool {
 
 func (p Piece) isCollideKing(board Board, y, x int) bool {
 	m := map[Piece]func(Board, int, int) bool{
-		PAWN: isCollideByPawn,
+		PAWN:   isCollideByPawn,
+		BISHOP: isCollideByBishop,
+		ROOK:   isCollideByRook,
+		QUEEN:  isCollideByQueen,
 	}
 
 	if p.isPiece() && p != KING {
@@ -36,5 +39,20 @@ func isCollideByPawn(b Board, y, x int) bool {
 	if b.at(y-1, x-1) == KING || b.at(y-1, x+1) == KING {
 		return true
 	}
+	return false
+}
+
+// TODO:
+func isCollideByBishop(b Board, y, x int) bool {
+	return false
+}
+
+// TODO:
+func isCollideByRook(b Board, y, x int) bool {
+	return false
+}
+
+// TODO:
+func isCollideByQueen(b Board, y, x int) bool {
 	return false
 }
