@@ -8,10 +8,11 @@ const (
 	BISHOP = 'B'
 	ROOK   = 'R'
 	QUEEN  = 'Q'
+	KNIGHT = 'N'
 )
 
 func (p Piece) isPiece() bool {
-	const pieces = "KPBRQ"
+	const pieces = "KPBRQN"
 
 	for _, v := range pieces {
 		if v == rune(p) {
@@ -27,6 +28,7 @@ func (p Piece) isCollideKing(board Board, y, x int) bool {
 		BISHOP: isCollideByBishop,
 		ROOK:   isCollideByRook,
 		QUEEN:  isCollideByQueen,
+		KNIGHT: isCollideByKnight,
 	}
 
 	if p.isPiece() && p != KING {
@@ -38,6 +40,17 @@ func (p Piece) isCollideKing(board Board, y, x int) bool {
 func isCollideByPawn(b Board, y, x int) bool {
 	if b.at(y-1, x-1) == KING || b.at(y-1, x+1) == KING {
 		return true
+	}
+	return false
+}
+
+func isCollideByKnight(b Board, y, x int) bool {
+	dx := []int{-2, -1, -2, -1, +2, +1, +2, +1}
+	dy := []int{-1, -2, +1, +2, -1, -2, +1, -2}
+	for i := range dy {
+		if Piece(b.at(y+dy[i], x+dx[i])) == KING {
+			return true
+		}
 	}
 	return false
 }

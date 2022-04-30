@@ -97,6 +97,7 @@ func TestIsCheck(t *testing.T) {
 	testIsCheckForBishop(t)
 	testIsCheckForRook(t)
 	testIsCheckForQueen(t)
+	testIsCheckForKnight(t)
 	testIsCheckMix(t)
 }
 
@@ -178,6 +179,25 @@ func testIsCheckForRook(t *testing.T) {
 	testIsCheckHelper(t, falseTest, false, 'R')
 }
 
+func testIsCheckForKnight(t *testing.T) {
+	trueTest := [][]byte{
+		[]byte(".N.N."),
+		[]byte("N...N"),
+		[]byte("..K.."),
+		[]byte("N...N"),
+		[]byte(".N.N."),
+	}
+	falseTest := [][]byte{
+		[]byte("N.N.N"),
+		[]byte(".NNN."),
+		[]byte("NNKNN"),
+		[]byte(".NNN."),
+		[]byte("N.N.N"),
+	}
+	testIsCheckHelper(t, trueTest, true, 'R')
+	testIsCheckHelper(t, falseTest, false, 'R')
+}
+
 func testIsCheckForQueen(t *testing.T) {
 	// trueTest := [][]byte{
 	// 	[]byte("QQQQQ"),
@@ -236,6 +256,12 @@ func testIsCheckMix(t *testing.T) {
 			"....",
 			"♘Q..",
 		},
+		[]string{
+			"RBPQ",
+			".K..",
+			"あ...",
+			"..N.",
+		},
 	}
 	falseTest := [][]string{
 		[]string{
@@ -252,7 +278,7 @@ func testIsCheckMix(t *testing.T) {
 		},
 		[]string{
 			"QB.K",
-			"....",
+			"..N.",
 			"....",
 			"....",
 		},
