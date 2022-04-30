@@ -42,17 +42,37 @@ func isCollideByPawn(b Board, y, x int) bool {
 	return false
 }
 
-// TODO:
+func checkDirection(b Board, y, x, dy, dx int) bool {
+	for y, x = y+dy, x+dx; b.isInBoard(y, x); y, x = y+dy, x+dx {
+		if Piece(b.at(y, x)).isPiece() {
+			return b.at(y, x) == KING
+		}
+	}
+	return false
+}
+
 func isCollideByBishop(b Board, y, x int) bool {
+	dx := []int{-1, 1, 1, -1}
+	dy := []int{-1, -1, 1, 1}
+	for i := range dx {
+		if checkDirection(b, y, x, dx[i], dy[i]) {
+			return true
+		}
+	}
 	return false
 }
 
-// TODO:
 func isCollideByRook(b Board, y, x int) bool {
+	dx := []int{0, 1, 0, -1}
+	dy := []int{-1, 0, 1, 0}
+	for i := range dx {
+		if checkDirection(b, y, x, dx[i], dy[i]) {
+			return true
+		}
+	}
 	return false
 }
 
-// TODO:
 func isCollideByQueen(b Board, y, x int) bool {
-	return false
+	return isCollideByBishop(b, y, x) || isCollideByRook(b, y, x)
 }
