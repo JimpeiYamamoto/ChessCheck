@@ -69,7 +69,7 @@ func checkmate(board []string) {
 
 func main() {
 	board := []string{
-		"R.P.",
+		"R...",
 		".K..",
 		"..P.",
 		"....",

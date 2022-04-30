@@ -97,6 +97,7 @@ func TestIsCheck(t *testing.T) {
 	testIsCheckForBishop(t)
 	testIsCheckForRook(t)
 	testIsCheckForQueen(t)
+	testIsCheckMix(t)
 }
 
 func testIsCheckForPawn(t *testing.T) {
@@ -201,6 +202,101 @@ func testIsCheckForQueen(t *testing.T) {
 	}
 	testIsCheckHelper(t, trueTest, true, 'Q')
 	testIsCheckHelper(t, falseTest, false, 'Q')
+}
+
+func testIsCheckMix(t *testing.T) {
+	trueTest := [][]string{
+		[]string{
+			"RB..",
+			".K..",
+			"..P.",
+			"Q...",
+		},
+		[]string{
+			"PB..",
+			".K.R",
+			"....",
+			"Q...",
+		},
+		[]string{
+			"RP..",
+			".K..",
+			"....",
+			"Q..B",
+		},
+		[]string{
+			"RBP.",
+			".K..",
+			"....",
+			"あQ..",
+		},
+		[]string{
+			"RBP.",
+			".K..",
+			"....",
+			"♘Q..",
+		},
+	}
+	falseTest := [][]string{
+		[]string{
+			"K...",
+			"....",
+			"P...",
+			"Q...",
+		},
+		[]string{
+			"...K",
+			"....",
+			".R..",
+			"Q...",
+		},
+		[]string{
+			"QB.K",
+			"....",
+			"....",
+			"....",
+		},
+		[]string{
+			"Q...",
+			".R..",
+			"....",
+			"...K",
+		},
+		[]string{
+			"Q...",
+			"....",
+			"P...",
+			"K...",
+		},
+		[]string{
+			"...Q",
+			"....",
+			".R..",
+			"K...",
+		},
+		[]string{
+			"KB.Q",
+			"....",
+			"....",
+			"....",
+		},
+		[]string{
+			"K...",
+			".R..",
+			"....",
+			"...Q",
+		},
+	}
+	for _, v := range trueTest {
+		if isCheck(v) != true {
+			t.Errorf("error: expected true\n%s", strings.Join(v[:], "\n"))
+		}
+	}
+	for _, v := range falseTest {
+		if isCheck(v) != false {
+			t.Errorf("error: expected false\n%s", strings.Join(v[:], "\n"))
+		}
+	}
 }
 
 func testIsCheckHelper(t *testing.T, board [][]byte, expected bool, piece byte) {
