@@ -194,8 +194,8 @@ func testIsCheckForKnight(t *testing.T) {
 		[]byte(".NNN."),
 		[]byte("N.N.N"),
 	}
-	testIsCheckHelper(t, trueTest, true, 'R')
-	testIsCheckHelper(t, falseTest, false, 'R')
+	testIsCheckHelper(t, trueTest, true, 'N')
+	testIsCheckHelper(t, falseTest, false, 'N')
 }
 
 func testIsCheckForQueen(t *testing.T) {

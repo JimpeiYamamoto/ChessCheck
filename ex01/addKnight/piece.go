@@ -46,7 +46,7 @@ func isCollideByPawn(b Board, y, x int) bool {
 
 func isCollideByKnight(b Board, y, x int) bool {
 	dx := []int{-2, -1, -2, -1, +2, +1, +2, +1}
-	dy := []int{-1, -2, +1, +2, -1, -2, +1, -2}
+	dy := []int{-1, -2, +1, +2, -1, -2, +1, +2}
 	for i := range dy {
 		if Piece(b.at(y+dy[i], x+dx[i])) == KING {
 			return true
