@@ -26,4 +26,3 @@ const (
 
 var board [][]byte
 var turn int
-var cnt int

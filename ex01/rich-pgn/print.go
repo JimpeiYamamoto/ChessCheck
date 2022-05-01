@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func toEmoji(r rune, y, x int) string {
@@ -44,20 +45,19 @@ func printBoard() {
 	// 	fmt.Println(string(row))
 	// }
 	fmt.Println()
+	time.Sleep(1 * time.Second)
 }
 
 func print() {
-	// turn count
-	if turn == WHITE {
-		fmt.Printf("%d.\n", cnt)
-		cnt++
-	}
+	fmt.Print("\033[2J")
 
 	// board
 	printBoard()
 }
 
 func printInit() {
+	fmt.Print("\033[2J")
 	// board
 	printBoard()
+	time.Sleep(1 * time.Second)
 }

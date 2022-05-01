@@ -12,5 +12,4 @@ func init() {
 		[]byte("RNBQKBNR"),
 	}
 	turn = WHITE
-	cnt = 1
 }
