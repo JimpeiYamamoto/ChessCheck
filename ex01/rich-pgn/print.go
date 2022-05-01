@@ -49,14 +49,14 @@ func printBoard() {
 }
 
 func print() {
-	fmt.Print("\033[2J")
+	fmt.Print("\033[2J\033[H")
 
 	// board
 	printBoard()
 }
 
 func printInit() {
-	fmt.Print("\033[2J")
+	fmt.Print("\033[2J\033[H")
 	// board
 	printBoard()
 	time.Sleep(1 * time.Second)
